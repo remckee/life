@@ -1,0 +1,7 @@
+blank
+blinker
+block
+clock
+star
+galaxy
+pulsar
