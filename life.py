@@ -3,12 +3,8 @@
 # 	simulates game of life generations
 # Author: Rebecca Mckeever
 # Date: 10/18/2019
-# Revised: 
-# 	10/20/2019
-# 	11/16/2019
-# 	11/18/2019
-# 	11/28/2019
-#	12/03/2019
+# Last Revised: 
+#	12/19/2019
 
 # list libraries used
 import lib_neighbor
@@ -16,6 +12,7 @@ import lib_draw
 import lib_csv
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import colorchooser
 from tkinter import *
 
 # Declare global constants (name in ALL_CAPS)
@@ -207,6 +204,10 @@ class Game(Tk):
 		return response
 	# End confirm_dialog()
 
+	def message_dialog(self, title, message):
+		messagebox.showinfo(title, message)
+	# End message_dialog()
+
 	def get_file_names(self):
 		patterns_file = ''
 		file_names = []
@@ -342,6 +343,7 @@ class Game(Tk):
 		full_file_name = lib_csv.ext_append(file_name)
 		save_file = False
 		patterns_file = ''
+		saved_message = "The current pattern was saved as " + full_file_name + "."
 
 		if (file_name in self.file_names):
 			if (self.confirm_dialog("Save As", "The folder already contains the file " + full_file_name + ". Do you want to overwrite that file with the current pattern?")):
@@ -349,6 +351,8 @@ class Game(Tk):
 			# End If
 		elif (self.confirm_dialog("Save As", "Really save current pattern as " + full_file_name + "?")):
 			save_file = True
+		else:
+			save_file = False
 		# End If
 
 		if (save_file):
@@ -363,6 +367,7 @@ class Game(Tk):
 
 			self.file_names = self.get_file_names()
 			self.options_list.configure(values=self.file_names)
+			self.message_dialog("Saved", saved_message)
 
 		# End If
 	# End function save_pattern()
