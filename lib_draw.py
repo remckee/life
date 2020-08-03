@@ -8,10 +8,8 @@
 # 	extend_grid
 # Author: Rebecca Mckeever
 # Date: 11/18/2019
-# Revised: 
-#	11/30/2019
-# 	12/03/2019
-# 	12/05/2019
+# Last Revised: 
+# 	08/03/2020
 
 # list libraries used
 import tkinter
@@ -55,7 +53,15 @@ def get_cell_color(state):
 def draw_cell(canvas, x, y, width, state, tag_list):
 	# Declare and INITIALZE Variables (EVERY variable used in this main program)
 	fill_color = get_cell_color(state)
-	canvas.create_rectangle(x, y, x+width, y+width, outline="#999", fill=fill_color, width=1, tags=tag_list)
+	canvas.create_rectangle(
+		x,
+		y,
+		x+width,
+		y+width,
+		outline="#999",
+		fill=fill_color,
+		width=1,
+		tags=tag_list)
 
 	return state
 # End draw_cell()
@@ -90,7 +96,13 @@ def draw_blank_grid(canvas, x, y, width, rows, cols, tag):
 		for j in range(cols):
 			pos_x = x + j*width
 			pos_y = y + i*width
-			cell = draw_cell(canvas, pos_x, pos_y, width, 0, tag)
+			cell = draw_cell(
+				canvas,
+				pos_x,
+				pos_y,
+				width,
+				0,
+				tag)
 			cell_row.append(cell)
 		# End For
 		cell_grid.append(cell_row)	
@@ -126,14 +138,20 @@ def draw_filled_grid(canvas, x, y, width, states, tag):
 	cell_row = []
 	cell = ''
 
-	for i in range(len(states)):
+	for i in range( len(states) ):
 		cell_row = []
-		for j in range(len(states[i])):
+		for j in range( len( states[i] ) ):
 			pos_x = x + j*width
 			pos_y = y + i*width
 			row_col = "r" + str(i) + "c" + str(j)
 			tag_list = [tag, row_col]
-			cell = draw_cell(canvas, pos_x, pos_y, width, states[i][j], tag_list)
+			cell = draw_cell(
+				canvas,
+				pos_x,
+				pos_y,
+				width,
+				states[i][j],
+				tag_list)
 			cell_row.append(cell)
 		# End For
 		cell_grid.append(cell_row)
@@ -161,7 +179,13 @@ def redraw_grid(canvas, x, y, width, states, tag):
 	cell_grid = []
 
 	canvas.delete(tag)
-	cell_grid = draw_filled_grid(canvas, x, y, width, states, tag)
+	cell_grid = draw_filled_grid(
+		canvas,
+		x,
+		y,
+		width,
+		states,
+		tag)
 
 	return cell_grid
 
@@ -169,7 +193,7 @@ def redraw_grid(canvas, x, y, width, states, tag):
 
 # Function extend_grid()
 # Description:
-#	adds or removes grid cells according to new dimensions, 
+#	adds or removes grid cells according to new dimensions,
 #	without changing the states of the remaining cells
 # Calls:
 #	redraw_grid()
@@ -187,7 +211,7 @@ def redraw_grid(canvas, x, y, width, states, tag):
 def extend_grid(canvas, x, y, width, states, tag, new_rows, new_cols):
 	# Declare and INITIALZE Variables (EVERY variable used in this main program)
 	cur_rows = len(states)
-	cur_cols = len(states[0])
+	cur_cols = len( states[0] )
 	cell_grid = []
 	row_diff = new_rows - cur_rows
 	col_diff = new_cols - cur_cols
@@ -197,7 +221,7 @@ def extend_grid(canvas, x, y, width, states, tag, new_rows, new_cols):
 
 	if (row_diff < 0):
 		for i in range(row_diff, 0, 1):
-			del(states[i])
+			del( states[i] )
 		# End For
 	elif (row_diff > 0):
 		row = [0] * cur_cols
@@ -207,17 +231,23 @@ def extend_grid(canvas, x, y, width, states, tag, new_rows, new_cols):
 	# End If
 
 	if (col_diff < 0):
-		for i in range(len(states)):
+		for i in range( len(states) ):
 			row = states[i]
 			states[i] = row[0:new_cols]
 		# End For
 	elif (col_diff > 0):
 		row_frag = [0] * col_diff
-		for i in range(len(states)):
+		for i in range( len(states) ):
 			states[i] = states[i] + row_frag
 		# End For
 	# End If
-	cell_grid = redraw_grid(canvas, x, y, width, states, tag)
+	cell_grid = redraw_grid(
+		canvas,
+		x,
+		y,
+		width,
+		states,
+		tag)
 	return cell_grid
 
 # End extend_grid()

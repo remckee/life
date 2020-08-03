@@ -4,10 +4,8 @@
 # 	set_csv
 # Author: Rebecca Mckeever
 # Date: 11/18/2019
-# Revised: 
-# 	11/30/2019
-# 	12/01/2019
-#	12/09/2019
+# Last Revised: 
+# 	08/03/2020
 
 # list libraries used
 
@@ -45,7 +43,7 @@ def get_csv(file_name):
 		row = row.split( COL_SEP )
 
 		for j in range( len(row) ):
-			row[j] = int(row[j])
+			row[j] = int( row[j] )
 		# End for
 
 		cell_arr.append(row)
@@ -78,7 +76,7 @@ def set_csv(file_name, cell_arr):
 
 	for i in range( len(cell_arr) ):
 		line = ''
-		for j in range( len(cell_arr[i]) ):
+		for j in range( len( cell_arr[i] ) ):
 			if ( j > 0 ):
 				line += COL_SEP
 			# End If
@@ -105,7 +103,7 @@ def set_csv(file_name, cell_arr):
 # Returns:
 #		file_name		String
 def ext_append (file_name):
-	if (not file_name.endswith(EXTENSION)):
+	if ( not file_name.endswith(EXTENSION) ):
 		file_name += EXTENSION
 	# End If
 

@@ -5,8 +5,8 @@
 # 	increment_bounds
 # Author: Rebecca Mckeever
 # Date: 10/18/2019
-# Revised: 
-# 	11/18/2019
+# Last Revised: 
+# 	08/03/2020
 
 # list libraries used
 
@@ -32,7 +32,7 @@ def grid_neighbors (arr):
 
 	for i in range( len(arr) ):
 		row = []
-		for j in range( len(arr[i]) ):
+		for j in range( len( arr[i] ) ):
 			row.append( cell_neighbors(arr, i, j) )
 		# End For
 
@@ -66,10 +66,22 @@ def cell_neighbors (arr, cell_row, cell_col):
 	rmax = cell_row
 	cmin = cell_col
 	cmax = cell_col
-	rmin = increment_bounds(rmin,   (cell_row > 0),                     -1)
-	rmax = increment_bounds(rmax,   (cell_row < len(arr)-1),             1)
-	cmin = increment_bounds(cmin,   (cell_col > 0),                     -1)
-	cmax = increment_bounds(cmax,   (cell_col < len(arr[cell_row])-1),   1)
+	rmin = increment_bounds(
+		rmin,
+		(cell_row > 0),
+		-1)
+	rmax = increment_bounds(
+		rmax,
+		(cell_row < len(arr) - 1),
+		1)
+	cmin = increment_bounds(
+		cmin,
+		(cell_col > 0),
+		-1)
+	cmax = increment_bounds(
+		cmax,
+		(cell_col < len( arr[cell_row] ) - 1),
+		1)
 	neighbors = 0
 
 	for i in range(rmin, rmax+1):
