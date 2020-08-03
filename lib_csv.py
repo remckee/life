@@ -110,3 +110,27 @@ def ext_append (file_name):
 	return file_name
 
 # End function ext_append()
+
+# Function ext_remove (file_name)
+# Description:
+#	removes .csv extension from file name if present
+# Calls:
+#	none
+# Parameters:
+#		file_name		String
+# Returns:
+#		file_name		String
+def ext_remove (file_name):
+	# Declare and INITIALZE Local Variables (NOT parameters)
+	offset = -1 * len(EXTENSION)
+
+	if ( file_name.endswith(EXTENSION) ):
+		file_name = file_name[:offset]
+	# End If
+
+	return file_name
+
+# End function ext_remove()
+
+
+
