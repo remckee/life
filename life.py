@@ -19,6 +19,7 @@ from tkinter import *
 PAT_FOLDER = "patterns/"
 START_FILE = "blank"
 USER_FILES = 'patterns.txt'
+MOVES_LOG = 'moves.txt'
 DEFAULT_FILENAME = "mypattern"
 EXTENSION = '.csv'
 CELL_SIZE = 20
@@ -81,6 +82,7 @@ class Game(Tk):
 		self.col_spin = ''
 		self.scale_value = DoubleVar()
 		self.controls = Frame(self)
+		self.current_move = 0
 
 		try:
 			# set up initial cell state array
@@ -105,6 +107,9 @@ class Game(Tk):
 			self.display_spiners()
 			self.display_save()
 			self.controls.grid(row=2, column=1)
+
+			# set up blank moves log file
+			self.init_moves_log(MOVES_LOG)
 
 		except Exception as err:
 			print( err )
@@ -458,6 +463,25 @@ class Game(Tk):
 		# Return the return variable, if any
 		return cell
 	# End Function generation()
+
+	# Function init_moves_log (moves_log)
+	# Description:
+	#	initializes a blank moves log file named moves_log, sets current move to 0
+	# Calls:
+	#	none
+	# Parameters:
+	#		moves_log		String
+	# Returns:
+	#		moves_log		String
+	def init_moves_log (self, moves_log):
+		moves_log_file = open(moves_log, 'w')
+		moves_log_file.write('')
+		moves_log_file.close()
+		self.current_move = 0
+
+		return moves_log
+
+	# End function init_moves_log()
 
 if __name__ == "__main__":
 	root = Game()
