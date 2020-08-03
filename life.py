@@ -4,7 +4,7 @@
 # Author: Rebecca Mckeever
 # Date: 10/18/2019
 # Last Revised: 
-#	12/19/2019
+#	08/02/2020
 
 # list libraries used
 import lib_neighbor
@@ -324,15 +324,18 @@ class Game(Tk):
 	# End function list_callback()
 
 	def click_cells(self, event):
-		fill = ""
 		cur_id = self.canvas.find_withtag("current")
-		cur_fill = self.canvas.itemcget(cur_id, "fill")
-		if (cur_fill == ON_COLOR):
-			self.canvas.itemconfig(cur_id, fill=OFF_COLOR)
-		elif (cur_fill == OFF_COLOR):
-			self.canvas.itemconfig(cur_id, fill=ON_COLOR)			
-		# End if
+		self.unclick_cell(cur_id)
 	# End function click_cells()
+
+	def unclick_cell(self, cell_id):
+		cur_fill = self.canvas.itemcget(cell_id, "fill")
+		if (cur_fill == ON_COLOR):
+			self.canvas.itemconfig(cell_id, fill=OFF_COLOR)
+		elif (cur_fill == OFF_COLOR):
+			self.canvas.itemconfig(cell_id, fill=ON_COLOR)			
+		# End if
+	# End function unclick_cell()
 
 	def clear_grid(self):
 		arr_1d = self.canvas.find_withtag(CELL_TAG)
@@ -384,7 +387,7 @@ class Game(Tk):
 		coord_list = self.canvas.coords(arr_1d[0])
 		y = coord_list[1]
 		cid = 0
-		fill_color = ""
+		fill_color = ''
 		state = 0
 
 		for i in range(len(arr_1d)):
@@ -406,9 +409,9 @@ class Game(Tk):
 		return states
 	# End function get_cell_states()
 
-	def get_cell_state(self, fill):
+	def get_cell_state(self, fill_color):
 		state = 0
-		if (fill == ON_COLOR):
+		if (fill_color == ON_COLOR):
 			state = 1
 		# End If
 		return state
