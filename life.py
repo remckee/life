@@ -409,10 +409,17 @@ class Game(Tk):
 		patterns_file = ''
 		file_names = []
 		index = 0
+		sys_msg = ''
 
-		patterns_file = open(USER_FILES, 'r')
-		file_names = patterns_file.readlines()
-		patterns_file.close()
+		try:
+			patterns_file = open(USER_FILES, 'r')
+			file_names = patterns_file.readlines()
+			patterns_file.close()
+
+		except Exception as sys_msg:
+			print ( sys_msg )
+
+		# End Try
 
 		for index in range( len( file_names ) ):
 			file_names[index] = file_names[index].rstrip('\n')
@@ -585,9 +592,16 @@ class Game(Tk):
 			lib_csv.set_csv(PAT_FOLDER + file_name, arr)
 
 			if not ( file_name in self.get_file_names() ):
-				patterns_file = open(USER_FILES, 'a')
-				patterns_file.write(file_name + '\n')
-				patterns_file.close()
+				try:
+					patterns_file = open(USER_FILES, 'a')
+					patterns_file.write(file_name + '\n')
+					patterns_file.close()
+
+				except Exception as sys_msg:
+					print ( sys_msg )
+
+				# End Try
+
 			# End If
 
 			self.file_names = self.get_file_names()
@@ -699,9 +713,16 @@ class Game(Tk):
 	# Returns:
 	#		moves_log		String
 	def init_moves_log (self, moves_log):
-		moves_log_file = open(moves_log, 'w')
-		moves_log_file.write('')
-		moves_log_file.close()
+		try:
+			moves_log_file = open(moves_log, 'w')
+			moves_log_file.write('')
+			moves_log_file.close()
+
+		except Exception as sys_msg:
+			print ( sys_msg )
+
+		# End Try
+
 		self.current_move = 0
 
 		return moves_log
