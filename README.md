@@ -23,8 +23,6 @@ Saving a pattern
 -----------
 To save the pattern currently displaying in the grid, enter the desired file name in the `save current pattern as` input box and then click the `Save` button. For best results, stop the animation before trying to save. The `.csv` extension is optional and will be automatically added to the saved file name if omitted.
 
-If you delete a previously saved pattern file from the folder, it will still be listed in the drop-down list in the program. Trying to select the deleted file from the list will give an error. To remove the file name from the drop-down list, manually remove the file name from the `patterns.txt` file.
-
 About
 -----------
 The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway.

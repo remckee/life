@@ -1,7 +1,7 @@
-blank
-blinker
-block
-clock
 star
+clock
+blank
 galaxy
 pulsar
+blinker
+block

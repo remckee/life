@@ -10,6 +10,7 @@
 import lib_neighbor
 import lib_draw
 import lib_csv
+import os
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter import colorchooser
@@ -394,17 +395,36 @@ class Game(Tk):
 		sys_msg = ''
 
 		try:
-			patterns_file = open(USER_FILES, 'r')
-			file_names = patterns_file.readlines()
-			patterns_file.close()
+			file_names = os.listdir(path=PAT_FOLDER)
 
 		except Exception as sys_msg:
 			print ( sys_msg )
 
+			try:
+				patterns_file = open(USER_FILES, 'r')
+				file_names = patterns_file.readlines()
+				patterns_file.close()
+
+			except Exception as sys_msg:
+				print ( sys_msg )
+
+			# End Try
+
+		# update patterns file with current directory contents
+		else:
+			patterns_file = open(USER_FILES, 'w')
+
+			for index in range( len( file_names ) ):
+				file_names[index] = lib_csv.ext_remove(file_names[index])
+				patterns_file.write(file_names[index] + '\n')
+			# End For
+
+			patterns_file.close()
+
 		# End Try
 
 		for index in range( len( file_names ) ):
-			file_names[index] = file_names[index].rstrip('\n')
+			file_names[index] = file_names[index].rstrip('\n')			
 		# End For
 
 		return file_names
