@@ -13,6 +13,9 @@
 !*.csv
 !*.txt
 !*.md
+!*.c
+!*.h
+!*.cpp
 
 # unignore image files
 !*.jpg
@@ -21,14 +24,12 @@
 !*.ico
 !*.svg
 
-# unignore this file
+# unignore gitignore and LICENSE
 !.gitignore
+!LICENSE
 
 # ignore default saved test pattern
 mypattern.csv
 
-# ignore moves log
-moves.txt
-
-# ignore patterns list file
-patterns.txt
+# ignore data files directory
+data_files/
