@@ -94,8 +94,8 @@ SCALE = 	(
 				3
 			)
 CANVAS_ = 	(
-				3,
 				1,
+				0,
 				1,
 				1
 			)
@@ -126,7 +126,8 @@ class Game(Tk):
 		self.row_spin = ''
 		self.col_spin = ''
 		self.scale_value = DoubleVar()
-		self.controls = Frame(self)
+		self.container = Frame(self)
+		self.controls = Frame(self.container)
 		self.current_move = 0
 
 		try:
@@ -143,7 +144,6 @@ class Game(Tk):
 			self.file_names = self.get_file_names()
 
 			# set up window components
-			self.spacers()
 			self.show_list()
 			self.buttons_bar()
 			self.display_scale()
@@ -151,7 +151,12 @@ class Game(Tk):
 			self.display_canvas(self.cell_arr)
 			self.display_spiners()
 			self.display_save()
-			self.controls.grid(row=2, column=1)
+			self.controls.grid(row=0)
+			self.container.grid(
+				row=0,
+				column=0,
+				padx=2*SPACER,
+				pady=2*SPACER)
 
 			# set up blank moves log file
 			self.init_moves_log(MOVES_LOG)
@@ -166,29 +171,6 @@ class Game(Tk):
 		delay = 1000/speed
 		return int(delay)
 	# End calc_delay()
-
-	def spacers(self):
-		top_spacer = Frame(self).grid(
-			row=0,
-			column=0,
-			columnspan=3,
-			pady=SPACER)
-		left_spacer = Frame(self).grid(
-			row=1,
-			column=0,
-			rowspan=3,
-			padx=SPACER)
-		right_spacer = Frame(self).grid(
-			row=1,
-			column=2,
-			rowspan=CANVAS_[0] + 2,
-			padx=SPACER)
-		intro_spacer = Frame(self.controls).grid(
-			row=INTRO_SPACE_ROW,
-			column=0,
-			columnspan=INTRO[3],
-			pady=SPACER)
-	# End function spacers()
 
 	def buttons_bar(self):
 		go_button = Button(self.controls,
@@ -301,7 +283,7 @@ class Game(Tk):
 	# End function show_intro()
 
 	def display_canvas(self, cell_arr):
-		self.canvas = Canvas(self,
+		self.canvas = Canvas(self.container,
 			width=self.width,
 			height=self.width)
 		self.canvas.tag_bind(CELL_TAG,
