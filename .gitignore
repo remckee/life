@@ -1,0 +1,34 @@
+# ignore everything 
+*
+
+# unignore directories
+!*/
+
+# unignore source code files
+!*.css
+!*.html
+!*.js
+!*.php
+!*.py
+!*.csv
+!*.txt
+!*.md
+
+# unignore image files
+!*.jpg
+!*.png
+!*.gif
+!*.ico
+!*.svg
+
+# unignore this file
+!.gitignore
+
+# ignore default saved test pattern
+mypattern.csv
+
+# ignore moves log
+moves.txt
+
+# ignore patterns list file
+patterns.txt
