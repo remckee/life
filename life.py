@@ -4,7 +4,7 @@
 # Author: Rebecca Mckeever
 # Date: 10/18/2019
 # Last Revised: 
-#	08/03/2020
+#	08/05/2020
 
 # list libraries used
 import lib_neighbor
@@ -38,76 +38,45 @@ SPACER = 5
 LIST_WIDTH = 12
 ENTRY_WIDTH = LIST_WIDTH
 INTRO_WRAP = 300
-GRID_COORDS = (2, 2)
-
-# TUPLE FORMATS: 	VAR = (ROW #, COL #[, ROWSPAN[, COLSPAN] ] )
-#					VAR_COL = (COL #, COLSPAN)
-COLS = 5
-INTRO = ( 0, 0, 4, 4 )
-INTRO_SPACE_ROW = INTRO[0] + 1
-LABEL_COL = (
-				INTRO[1] + INTRO[3],
-				2
-			)
-INPUT_1 = 	(
-				0,
-				LABEL_COL[0] + LABEL_COL[1],
-				1,
-				1
-			)
-INPUT_2 = 	(
-				INPUT_1[0] + 1,
-				INPUT_1[1],
-				INPUT_1[2],
-				INPUT_1[3]
-			)
-INPUT_3 = 	(
-				INPUT_2[0] + 1,
-				INPUT_1[1],
-				INPUT_1[2],
-				INPUT_1[3]
-			)
-INPUT_4 = 	(
-				INPUT_3[0] + 1,
-				INPUT_1[1],
-				INPUT_1[2],
-				INPUT_1[3]
-			)
-BTN_1 = 	(
-				INPUT_4[0] + 1,
-				0
-			)
-BTN_2 = 	(
-				BTN_1[0],
-				BTN_1[1] + 1
-			)
-BTN_3 = 	(
-				BTN_1[0],
-				BTN_2[1] + 1
-			)
-BTN_4 = 	(
-				BTN_1[0],
-				BTN_3[1] + 1
-			)
-SCALE = 	(
-				BTN_1[0],
-				BTN_4[1] + 2,
-				1,
-				3
-			)
-CANVAS_ = 	(
-				1,
-				0,
-				1,
-				1
-			)
-TOT_ROWS = CANVAS_[0] + 2
 
 class Game(Tk):
 	def __init__(self):
 		Tk.__init__(self)
 
-		# Declare and INITIALZE Variables (EVERY variable used in this main program)		
+		# Declare and INITIALZE Variables (EVERY variable used in this main program)
+		self.grid_coords = {'x': 2, 'y': 2}
+		self.intro = 	{
+							'row': 0, 
+							'col': 0, 
+							'rowspan': 4, 
+							'colspan': 4
+						}
+		self.label = 	{
+							'col': self.intro['col'] + self.intro['colspan'], 
+							'colspan': 2
+						}
+		self.inputs = 	{
+							'row': list( range(0, 4) ),
+							'col': self.label['col'] + self.label['colspan'],
+							'rowspan': 1,
+							'colspan': 1
+						}
+		self.buttons =	{
+							'row': self.inputs['row'][3] + 1,
+							'col': list( range(0, 4) )
+						}
+		self.scale = 	{
+							'row': self.buttons['row'],
+							'col': self.buttons['col'][3] + 2,
+							'rowspan': 1,
+							'colspan': 3
+						}
+		self.canvas = 	{
+							'row': 1, 
+							'col': 0, 
+							'rowspan': 1, 
+							'colspan': 1
+						}		
 		self.keep_going = False
 		self.file_names = []
 		self.cell_arr = [
@@ -124,7 +93,7 @@ class Game(Tk):
 		self.list_selection = StringVar()
 		self.save_name = StringVar()
 		self.options_list = ''
-		self.canvas = ''
+		self.cell_canvas = ''
 		self.row_spin = ''
 		self.col_spin = ''
 		self.scale_value = DoubleVar()
@@ -181,8 +150,8 @@ class Game(Tk):
 			bg='#28a745', activebackground='#218838',
 			fg='white', activeforeground='white')
 		go_button.grid(
-			row=BTN_1[0],
-			column=BTN_1[1],
+			row=self.buttons['row'],
+			column=self.buttons['col'][0],
 			pady=SPACER,
 			sticky=E+W)
 
@@ -192,8 +161,8 @@ class Game(Tk):
 			bg='#dc3545', activebackground='#c82333',
 			fg='white', activeforeground='white')
 		stop_button.grid(
-			row=BTN_2[0],
-			column=BTN_2[1],
+			row=self.buttons['row'],
+			column=self.buttons['col'][1],
 			pady=SPACER,
 			sticky=E+W)
 
@@ -202,8 +171,8 @@ class Game(Tk):
 			command=self.forward,
 			bg='#ffc107', activebackground='#e0a800')
 		forward_button.grid(
-			row=BTN_3[0],
-			column=BTN_3[1],
+			row=self.buttons['row'],
+			column=self.buttons['col'][2],
 			pady=SPACER,
 			sticky=E+W)
 
@@ -213,8 +182,8 @@ class Game(Tk):
 			bg='#007bff', activebackground='#0069d9',
 			foreground='white', activeforeground='white')
 		clear_button.grid(
-			row=BTN_4[0],
-			column=BTN_4[1],
+			row=self.buttons['row'],
+			column=self.buttons['col'][3],
 			pady=SPACER,
 			sticky=E+W)
 	# End function buttons_bar()
@@ -222,9 +191,9 @@ class Game(Tk):
 	def display_scale(self):
 		scale_label = Label(self.controls, text='speed:')
 		scale_label.grid(
-			row=SCALE[0],
-			column=SCALE[1] - 1,
-			rowspan=SCALE[2],
+			row=self.scale['row'],
+			column=self.scale['col'] - 1,
+			rowspan=self.scale['rowspan'],
 			padx=SPACER,
 			sticky=E)
 
@@ -238,19 +207,19 @@ class Game(Tk):
 			tickinterval=9.5,
 			length=300)
 		speed_scale.grid(
-			row=SCALE[0],
-			column=SCALE[1],
-			rowspan=SCALE[2],
-			columnspan=SCALE[3],
+			row=self.scale['row'],
+			column=self.scale['col'],
+			rowspan=self.scale['rowspan'],
+			columnspan=self.scale['colspan'],
 			sticky=W)
 	# End function display_scale()
 
 	def show_list(self):
 		list_label = Label(self.controls, text='initial state:')
 		list_label.grid(
-			row=INPUT_1[0],
-			column=LABEL_COL[0],
-			columnspan=LABEL_COL[1],
+			row=self.inputs['row'][0],
+			column=self.label['col'],
+			columnspan=self.label['colspan'],
 			padx=SPACER,
 			sticky=E)
 		self.list_selection.set(START_FILE)	
@@ -262,9 +231,9 @@ class Game(Tk):
 		self.options_list.bind('<<ComboboxSelected>>', self.list_callback)
 		self.options_list.bind('<Return>', self.list_callback)
 		self.options_list.grid(
-			row=INPUT_1[0],
-			column=INPUT_1[1],
-			columnspan=INPUT_1[3],
+			row=self.inputs['row'][0],
+			column=self.inputs['col'],
+			columnspan=self.inputs['colspan'],
 			padx=SPACER,
 			sticky=E+N+W+S)
 	# End function show_list()
@@ -277,29 +246,29 @@ class Game(Tk):
 			justify=LEFT,
 			wraplength=INTRO_WRAP)
 		intro_label.grid(
-			row=INTRO[0],
-			column=INTRO[1],
-			rowspan=INTRO[2],
-			columnspan=INTRO[3],
+			row=self.intro['row'],
+			column=self.intro['col'],
+			rowspan=self.intro['rowspan'],
+			columnspan=self.intro['colspan'],
 			sticky=N+E+W)
 	# End function show_intro()
 
 	def display_canvas(self, cell_arr):
-		self.canvas = Canvas(self.container,
+		self.cell_canvas = Canvas(self.container,
 			width=self.width,
 			height=self.width)
-		self.canvas.tag_bind(CELL_TAG,
+		self.cell_canvas.tag_bind(CELL_TAG,
 			'<Button-1>',
 			self.click_cells)
-		self.canvas.grid(
-			row=CANVAS_[0],
-			column=CANVAS_[1],
-			columnspan=CANVAS_[3],
+		self.cell_canvas.grid(
+			row=self.canvas['row'],
+			column=self.canvas['col'],
+			columnspan=self.canvas['colspan'],
 			padx=0,
 			pady=SPACER)
-		lib_draw.draw_filled_grid(self.canvas,
-			GRID_COORDS[0],
-			GRID_COORDS[1],
+		lib_draw.draw_filled_grid(self.cell_canvas,
+			self.grid_coords['x'],
+			self.grid_coords['y'],
 			CELL_SIZE,
 			cell_arr,
 			CELL_TAG)
@@ -308,9 +277,9 @@ class Game(Tk):
 	def display_spiners(self):
 		row_label = Label(self.controls, text='rows:')
 		row_label.grid(
-			row=INPUT_2[0],
-			column=LABEL_COL[0],
-			columnspan=LABEL_COL[1],
+			row=self.inputs['row'][1],
+			column=self.label['col'],
+			columnspan=self.label['colspan'],
 			padx=SPACER,
 			sticky=E)
 		self.row_spin = Spinbox(self.controls,
@@ -320,17 +289,17 @@ class Game(Tk):
 			command=self.adjust_dimensions,
 			width=LIST_WIDTH)
 		self.row_spin.grid(
-			row=INPUT_2[0],
-			column=INPUT_2[1],
-			columnspan=INPUT_2[3],
+			row=self.inputs['row'][1],
+			column=self.inputs['col'],
+			columnspan=self.inputs['colspan'],
 			padx=SPACER,
 			sticky=N+E+W+S)
 
 		col_label = Label(self.controls, text='columns:')
 		col_label.grid(
-			row=INPUT_3[0],
-			column=LABEL_COL[0],
-			columnspan=LABEL_COL[1],
+			row=self.inputs['row'][2],
+			column=self.label['col'],
+			columnspan=self.label['colspan'],
 			padx=SPACER,
 			sticky=E)
 		self.col_spin = Spinbox(self.controls,
@@ -340,9 +309,9 @@ class Game(Tk):
 			command=self.adjust_dimensions,
 			width=LIST_WIDTH)
 		self.col_spin.grid(
-			row=INPUT_3[0],
-			column=INPUT_3[1],
-			columnspan=INPUT_3[3],
+			row=self.inputs['row'][2],
+			column=self.inputs['col'],
+			columnspan=self.inputs['colspan'],
 			padx=SPACER,
 			sticky=N+E+W+S)
 	# End display_spiners()
@@ -352,18 +321,18 @@ class Game(Tk):
 			text="save current pattern as:",
 			wraplength=100)
 		name_label.grid(
-			row=INPUT_4[0],
-			column=LABEL_COL[0],
-			columnspan=LABEL_COL[1],
+			row=self.inputs['row'][3],
+			column=self.label['col'],
+			columnspan=self.label['colspan'],
 			padx=SPACER,
 			sticky=E)
 		name_entry = Entry(self.controls,
 			width=ENTRY_WIDTH,
 			textvariable=self.save_name)
 		name_entry.grid(
-			row=INPUT_4[0],
-			column=INPUT_4[1],
-			columnspan=INPUT_4[3],
+			row=self.inputs['row'][3],
+			column=self.inputs['col'],
+			columnspan=self.inputs['colspan'],
 			padx=SPACER,
 			sticky=N+E+W+S)
 
@@ -371,8 +340,8 @@ class Game(Tk):
 			text='Save',
 			command=self.save_pattern)
 		save_button.grid(
-			row=INPUT_4[0],
-			column=INPUT_4[1]+INPUT_4[3],
+			row=self.inputs['row'][3],
+			column=self.inputs['col']+self.inputs['colspan'],
 			sticky=N+W+S)
 	# End display_save()
 
@@ -443,9 +412,9 @@ class Game(Tk):
 		self.cell_arr = self.get_cell_states()
 
 		if (in_range):
-			lib_draw.extend_grid(self.canvas,
-				GRID_COORDS[0],
-				GRID_COORDS[1],
+			lib_draw.extend_grid(self.cell_canvas,
+				self.grid_coords['x'],
+				self.grid_coords['y'],
 				CELL_SIZE,
 				self.cell_arr,
 				CELL_TAG,
@@ -492,7 +461,7 @@ class Game(Tk):
 	def resize_canvas(self):	
 		self.width = self.canvas_width()
 		self.height = self.canvas_height()
-		self.canvas.configure(
+		self.cell_canvas.configure(
 			width=self.width,
 			height=self.height)
 		self.num_cols.set( self.number_cols() )
@@ -532,9 +501,9 @@ class Game(Tk):
 		else:
 			error = False
 			self.resize_canvas()
-			lib_draw.redraw_grid(self.canvas,
-				GRID_COORDS[0],
-				GRID_COORDS[1],
+			lib_draw.redraw_grid(self.cell_canvas,
+				self.grid_coords['x'],
+				self.grid_coords['y'],
 				CELL_SIZE,
 				self.cell_arr,
 				CELL_TAG)	
@@ -548,23 +517,23 @@ class Game(Tk):
 	# End function list_callback()
 
 	def click_cells(self, event):
-		cur_id = self.canvas.find_withtag("current")
+		cur_id = self.cell_canvas.find_withtag("current")
 		self.unclick_cell(cur_id)
 	# End function click_cells()
 
 	def unclick_cell(self, cell_id):
-		cur_fill = self.canvas.itemcget(cell_id, "fill")
+		cur_fill = self.cell_canvas.itemcget(cell_id, "fill")
 		if (cur_fill == ON_COLOR):
-			self.canvas.itemconfig(cell_id, fill=OFF_COLOR)
+			self.cell_canvas.itemconfig(cell_id, fill=OFF_COLOR)
 		elif (cur_fill == OFF_COLOR):
-			self.canvas.itemconfig(cell_id, fill=ON_COLOR)			
+			self.cell_canvas.itemconfig(cell_id, fill=ON_COLOR)			
 		# End if
 	# End function unclick_cell()
 
 	def clear_grid(self):
-		arr = self.canvas.find_withtag(CELL_TAG)
+		arr = self.cell_canvas.find_withtag(CELL_TAG)
 		for i in range( len(arr) ):
-			self.canvas.itemconfig(arr[i], fill=OFF_COLOR)
+			self.cell_canvas.itemconfig(arr[i], fill=OFF_COLOR)
 		# End For
 	# End function 
 
@@ -615,10 +584,10 @@ class Game(Tk):
 	# End function save_pattern()
 
 	def get_cell_states(self):
-		cell_list = self.canvas.find_withtag(CELL_TAG)
+		cell_list = self.cell_canvas.find_withtag(CELL_TAG)
 		arr_row = []
 		states = []
-		coord_list = self.canvas.coords( cell_list[0] )
+		coord_list = self.cell_canvas.coords( cell_list[0] )
 		y = coord_list[1]
 		cell_id = 0
 		fill_color = ''
@@ -626,9 +595,9 @@ class Game(Tk):
 
 		for i in range( len(cell_list) ):
 			cell_id = cell_list[i]
-			fill_color = self.canvas.itemcget(cell_id, "fill")
+			fill_color = self.cell_canvas.itemcget(cell_id, "fill")
 			state = self.get_cell_state(fill_color)
-			coord_list = self.canvas.coords(cell_id)
+			coord_list = self.cell_canvas.coords(cell_id)
 
 			if (y == coord_list[1] ):
 				arr_row.append(state)
@@ -666,9 +635,9 @@ class Game(Tk):
 		# End For
 
 		self.resize_canvas()
-		lib_draw.redraw_grid(self.canvas,
-			GRID_COORDS[0],
-			GRID_COORDS[1],
+		lib_draw.redraw_grid(self.cell_canvas,
+			self.grid_coords['x'],
+			self.grid_coords['y'],
 			CELL_SIZE,
 			cell_arr,
 			tag)	
