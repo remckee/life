@@ -18,9 +18,10 @@ from tkinter import *
 
 # Declare global constants (name in ALL_CAPS)
 PAT_FOLDER = 'patterns/'
+DATA_FOLDER = 'data_files/'
 START_FILE = 'blank'
-USER_FILES = 'patterns.txt'
-MOVES_LOG = 'moves.txt'
+USER_FILES = DATA_FOLDER + 'patterns.txt'
+MOVES_LOG = DATA_FOLDER + 'moves.txt'
 DEFAULT_FILENAME = 'mypattern'
 EXTENSION = '.csv'
 CELL_SIZE = 20
