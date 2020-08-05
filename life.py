@@ -366,6 +366,7 @@ class Game(Tk):
 
 		try:
 			file_names = os.listdir(path=PAT_FOLDER)
+			file_names.sort()
 
 		except Exception as sys_msg:
 			print ( sys_msg )

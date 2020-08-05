@@ -1,7 +1,7 @@
-star
-clock
 blank
-galaxy
-pulsar
 blinker
 block
+clock
+galaxy
+pulsar
+star
