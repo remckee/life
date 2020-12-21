@@ -3,7 +3,11 @@ Game of Life
 
 Starting the program
 -----------
-To start the program, run the file `life.py`
+To start the program, run the file `life.py`. For example,
+
+    python3 life.py
+
+![screenshot of program running with the clock pattern, not animated](screenshot_clock_initial_state.png "clock pattern")
 
 Creating initial patterns
 -----------
