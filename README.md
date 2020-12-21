@@ -7,8 +7,8 @@ To start the program, run the file `life.py`. For example,
 
     python3 life.py
 
-<img src="/rebecca-mckeever/life/raw/master/screenshot_clock_initial_state.png" alt="screenshot of program running with the clock pattern, not animated" title="clock pattern" style="max-width:49%;">
-<img src="/rebecca-mckeever/life/raw/master/animated_clock.gif" alt="screenshot of program running with the clock pattern, animated" title="animated clock pattern" style="max-width:49%;">
+<img src="screenshot_clock_initial_state.png" alt="screenshot of program running with the clock pattern, not animated" title="clock pattern" style="max-width:49%;">
+<img src="animated_clock.gif" alt="screenshot of program running with the clock pattern, animated" title="animated clock pattern" style="max-width:49%;">
 
 Creating initial patterns
 -----------
