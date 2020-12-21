@@ -32,4 +32,4 @@
 mypattern.csv
 
 # ignore data files directory
-data_files/
+data_files/*
