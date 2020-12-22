@@ -3,14 +3,13 @@ Game of Life
 
 Starting the program
 -----------
-To start the program, run the file `life.py`. For example,
+To start the program, run the file `life.py` with python on the command line. For example,
 
     python3 life.py
 
-<p>
-    <img src="screenshot_clock_initial_state.png" alt="screenshot of program running with the clock pattern, not animated" title="clock pattern" style="max-width:49%;">
-    <img src="animated_clock.gif" alt="screenshot of program running with the clock pattern, animated" title="animated clock pattern" style="max-width:49%;">
-</p>
+|  |  |
+| ------------- | ------------- |
+| ![screenshot of program running with the pulsar pattern, animated](/animated_pulsar.gif "pulsar pattern")  | ![screenshot of program running with the clock pattern, animated](animated_clock.gif "animated clock pattern")  |
 
 Creating initial patterns
 -----------
