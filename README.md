@@ -9,7 +9,9 @@ To start the program, run the file `life.py` with python on the command line. Fo
 
 |  |  |
 | ------------- | ------------- |
-| ![screenshot of program running with the pulsar pattern, animated](/animated_pulsar.gif "pulsar pattern")  | ![screenshot of program running with the clock pattern, animated](animated_clock.gif "animated clock pattern")  |
+| ![screenshot of program running with the blinker pattern, animated](pattern_images/animated_blinker.gif "blinker pattern")  | ![screenshot of program running with the block pattern, animated](pattern_images/animated_block.gif "animated block pattern")  |
+| ![screenshot of program running with the star pattern, animated](pattern_images/animated_star.gif "star pattern")  | ![screenshot of program running with the clock pattern, animated](pattern_images/animated_clock.gif "animated clock pattern")  |
+| ![screenshot of program running with the pulsar pattern, animated](pattern_images/animated_pulsar.gif "pulsar pattern")  | ![screenshot of program running with the galaxy pattern, animated](pattern_images/animated_galaxy.gif "animated galaxy pattern")  |
 
 Creating initial patterns
 -----------
