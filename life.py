@@ -78,6 +78,7 @@ class Game(Tk):
                             'colspan': 1
                         }
         self.keep_going = False
+        self.going = False
         self.file_names = []
         self.cell_arr = [
             [0, 0, 0, 0, 0],
@@ -452,11 +453,15 @@ class Game(Tk):
 
     def go(self):
         self.keep_going = True
-        self.cont_gen()
+        if (not self.going):
+            self.cont_gen()
+            self.going = True
+        # End If
     # End function
 
     def stop(self):
         self.keep_going = False
+        self.going = False
     # End function
 
     def resize_canvas(self):
