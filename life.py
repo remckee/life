@@ -1,10 +1,10 @@
 # Program gamelife.py
 # Description: 
-# 	simulates game of life generations
+#   simulates game of life generations
 # Author: Rebecca Mckeever
 # Date: 10/18/2019
 # Last Revised: 
-#	08/05/2020
+#   08/05/2020
 
 # list libraries used
 import lib_neighbor
@@ -45,33 +45,33 @@ class Game(Tk):
 
         # Declare and INITIALZE Variables (EVERY variable used in this main program)
         self.grid_coords = {'x': 2, 'y': 2}
-        self.intro = 	{
+        self.intro =    {
                             'row': 0,
                             'col': 0,
                             'rowspan': 4,
                             'colspan': 4
                         }
-        self.label = 	{
+        self.label =    {
                             'col': self.intro['col'] + self.intro['colspan'],
                             'colspan': 2
                         }
-        self.inputs = 	{
+        self.inputs =   {
                             'row': list( range(0, 4) ),
                             'col': self.label['col'] + self.label['colspan'],
                             'rowspan': 1,
                             'colspan': 1
                         }
-        self.buttons =	{
+        self.buttons =  {
                             'row': self.inputs['row'][3] + 1,
                             'col': list( range(0, 4) )
                         }
-        self.scale = 	{
+        self.scale =    {
                             'row': self.buttons['row'],
                             'col': self.buttons['col'][3] + 2,
                             'rowspan': 1,
                             'colspan': 3
                         }
-        self.canvas = 	{
+        self.canvas =   {
                             'row': 1,
                             'col': 0,
                             'rowspan': 1,
@@ -647,19 +647,19 @@ class Game(Tk):
 
     # Function generation (cell, neighbors)
     # Description:
-    #	determines if cell will be dead or alive in next generation
-    #	based on current state and number of neighbors, based on the Game of Life rules:
-    #	1.  Any live cell with two or three neighbors survives.
-    #	2.  Any dead cell with three live neighbors becomes a live cell.
-    #	3.  All other live cells die in the next generation.
-    #		Similarly, all other dead cells stay dead.
+    #   determines if cell will be dead or alive in next generation
+    #   based on current state and number of neighbors, based on the Game of Life rules:
+    #   1.  Any live cell with two or three neighbors survives.
+    #   2.  Any dead cell with three live neighbors becomes a live cell.
+    #   3.  All other live cells die in the next generation.
+    #       Similarly, all other dead cells stay dead.
     # Calls:
-    #	none
+    #   none
     # Parameters:
-    #		cell			Integer
-    #		neighbors		Integer
+    #       cell            Integer
+    #       neighbors       Integer
     # Returns:
-    #		cell
+    #       cell
     def generation (self, state, neighbors):
 
         # Declare and INITIALZE Local Variables (NOT parameters)
@@ -678,13 +678,13 @@ class Game(Tk):
 
     # Function init_moves_log (moves_log)
     # Description:
-    #	initializes a blank moves log file named moves_log, sets current move to 0
+    #   initializes a blank moves log file named moves_log, sets current move to 0
     # Calls:
-    #	none
+    #   none
     # Parameters:
-    #		moves_log		String
+    #       moves_log       String
     # Returns:
-    #		moves_log		String
+    #       moves_log       String
     def init_moves_log (self, moves_log):
         try:
             moves_log_file = open(moves_log, 'w')
